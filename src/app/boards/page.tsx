@@ -125,7 +125,7 @@ const Boards = () => {
     setPost(post.filter((p) => p.postId !== postId));
   };
 
-  console.log(post);
+  console.log(process.env.NEXT_PUBLIC_BACKEND_HOSTNAME);
   return (
     <BoardsWrapper>
       {modal && (

@@ -7,14 +7,22 @@ import styled from "styled-components";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 
+interface Comment {
+  postId: number;
+  commentId: number;
+  writer: string;
+  content: string;
+  created_at: string;
+}
+
 const BoardDetail = () => {
   const postId = useParams();
   const router = useRouter();
-  const [postData, setPostData] = useState<any>([]);
+  const [postData, setPostData] = useState<any>({});
   const [modal, setModal] = useState(false);
   const [openSidebar, setOpenSidebar] = useState(false);
   const [comment, setComment] = useState("");
-  const [commentList, setCommentList] = useState([]);
+  const [commentList, setCommentList] = useState<Comment[]>([]);
 
   const MySwal = withReactContent(Swal);
 
@@ -66,6 +74,8 @@ const BoardDetail = () => {
           htmlContainer: "swal-custom-html-container",
         },
       });
+      setCommentList((prev) => [...prev, response.data]);
+      setComment("");
     } catch (error) {
       console.error("comment 등록 실패", error);
       MySwal.fire({
@@ -84,9 +94,35 @@ const BoardDetail = () => {
     }
   };
 
+  const handleLongPress = (commentId: number) => {
+    MySwal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonText: "Yes, delete it!",
+      cancelButtonText: "No, cancel!",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        try {
+          await axios.delete(
+            `${process.env.NEXT_PUBLIC_BACKEND_HOSTNAME}/boards/comment/${commentId}`
+          );
+          setCommentList((prev) =>
+            prev.filter((comment) => comment.commentId !== commentId)
+          );
+          MySwal.fire("Deleted!", "Your comment has been deleted.", "success");
+        } catch (error) {
+          console.error("Comment 삭제 실패", error);
+          MySwal.fire("Error", "Failed to delete the comment.", "error");
+        }
+      }
+    });
+  };
+
   useEffect(() => {
     fetchBoardData();
-  }, [onClickCommentSubmit]);
+  }, [postId]);
 
   return (
     <BoardDetailWrapper>
@@ -137,14 +173,38 @@ const BoardDetail = () => {
         <RightWrapper>
           <RightTop>
             <RightTopHeader>Title</RightTopHeader>
-            <RightTopBody>Body</RightTopBody>
+            <RightTopBody>{postData.title}</RightTopBody>
           </RightTop>
           <RightBottom>
             <RightBottomHeader>Comment List</RightBottomHeader>
             <RightBottomBody>
               <CommentList>
                 {commentList.map((comment, index) => (
-                  <ShowComments key={index}>{comment}</ShowComments>
+                  <ShowComments
+                    key={index}
+                    onMouseDown={(e) => {
+                      if (comment.writer === localStorage.getItem("user")) {
+                        const target = e.target as HTMLElement;
+                        const timeout = setTimeout(() => {
+                          handleLongPress(comment.commentId);
+                        }, 800);
+                        target.onmouseup = () => clearTimeout(timeout);
+                        target.onmouseleave = () => clearTimeout(timeout);
+                      }
+                    }}
+                    onTouchStart={(e) => {
+                      if (comment.writer === localStorage.getItem("user")) {
+                        const target = e.target as HTMLElement;
+                        const timeout = setTimeout(() => {
+                          handleLongPress(comment.commentId);
+                        }, 800);
+                        target.ontouchend = () => clearTimeout(timeout);
+                        target.ontouchcancel = () => clearTimeout(timeout);
+                      }
+                    }}
+                  >
+                    <strong>{comment.writer}</strong>: {comment.content}
+                  </ShowComments>
                 ))}
               </CommentList>
             </RightBottomBody>
@@ -153,6 +213,7 @@ const BoardDetail = () => {
                 <CommentInput
                   placeholder="Enter comment"
                   onChange={onChangeCommnet}
+                  value={comment}
                 />
                 <CommentSubmit
                   src="/assets/send.png"
@@ -278,7 +339,7 @@ const DeskImage = styled.img`
 
 const BackImage = styled.img`
   width: 340px;
-  height: 245px;
+  height: 230px;
   left: 268px;
   top: 140px;
   border-radius: 10px;

@@ -45,7 +45,7 @@ const Home = () => {
   }, [searchParams, router]);
 
   const onClickLogin = () => {
-    window.location.href = "https://archidesk.loca.lt/auth/google/callback";
+    window.location.href = "http://localhost:3001/auth/google/callback";
   };
 
   const onClickWelcome = () => {
