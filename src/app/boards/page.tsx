@@ -184,7 +184,10 @@ const Boards = () => {
               <CloseButton onClick={toggleSidebar}>&times;</CloseButton>
               <SidebarLink href="/">Home</SidebarLink>
               <SidebarLink href="boards">Boards</SidebarLink>
-              <SidebarLink href="recommend">Recommend</SidebarLink>
+              <SidebarLink href="desk">Desk</SidebarLink>
+              <SidebarLink href="monitor">Monitor</SidebarLink>
+              <SidebarLink href="keyboard">Keyboard</SidebarLink>
+              <SidebarLink href="mouse">Mouse</SidebarLink>
             </SidebarContent>
           </Sidebar>
         </SidebarOverlay>
