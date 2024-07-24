@@ -87,7 +87,10 @@ const Monitor = () => {
         </SidebarOverlay>
       )}
       <Header>
-        <Logo>Monitor</Logo>
+        <HeaderRight>
+          <Logo>Monitor</Logo>
+          <SubText>Recommended monitor for you</SubText>
+        </HeaderRight>
         <MenuButton onClick={toggleSidebar}>Menu</MenuButton>
       </Header>
       <ItemTopWrapper>
@@ -130,7 +133,23 @@ const MonitorWrapper = styled.div`
 
 const Header = styled.div`
   display: flex;
+  flex-direction: row;
   justify-content: space-between;
+  align-items: center;
+`;
+
+const HeaderRight = styled.div`
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+`;
+
+const SubText = styled.div`
+  font-size: 20px;
+  color: #a6a39f;
+  padding-bottom: 10px;
+  display: flex;
+  flex-direction: row;
   align-items: center;
 `;
 

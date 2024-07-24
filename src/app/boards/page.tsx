@@ -240,12 +240,6 @@ const HeaderRight = styled.div`
   gap: 10px;
 `;
 
-const Logo = styled.div`
-  font-size: 50px;
-  color: #787878;
-  cursor: pointer;
-`;
-
 const SubText = styled.div`
   font-size: 20px;
   color: #a6a39f;
@@ -253,6 +247,12 @@ const SubText = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
+`;
+
+const Logo = styled.div`
+  font-size: 50px;
+  color: #787878;
+  cursor: pointer;
 `;
 
 const AddDesk = styled.div`

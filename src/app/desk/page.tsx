@@ -85,7 +85,10 @@ const Desk = () => {
         </SidebarOverlay>
       )}
       <Header>
-        <Logo>Desk</Logo>
+        <HeaderRight>
+          <Logo>Desk</Logo>
+          <SubText>Recommended desk for you</SubText>
+        </HeaderRight>
         <MenuButton onClick={toggleSidebar}>Menu</MenuButton>
       </Header>
       <ItemTopWrapper>
@@ -125,7 +128,23 @@ const DeskWrapper = styled.div`
 
 const Header = styled.div`
   display: flex;
+  flex-direction: row;
   justify-content: space-between;
+  align-items: center;
+`;
+
+const HeaderRight = styled.div`
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+`;
+
+const SubText = styled.div`
+  font-size: 20px;
+  color: #a6a39f;
+  padding-bottom: 10px;
+  display: flex;
+  flex-direction: row;
   align-items: center;
 `;
 
