@@ -27,7 +27,7 @@ const Boards = () => {
   const router = useRouter();
 
   const onClickAddDesk = () => {
-    setModal(true);
+    setModal((prev) => !prev);
   };
 
   const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -90,7 +90,6 @@ const Boards = () => {
           htmlContainer: "swal-custom-html-container",
         },
       });
-      setModal(false);
     } catch (error) {
       console.error("Post 실패", error);
       MySwal.fire({
@@ -283,7 +282,7 @@ const SidebarOverlay = styled.div`
   width: 100%;
   height: 100%;
   background: rgba(0, 0, 0, 0.5);
-  z-index: 999;
+  z-index: 1000;
 `;
 
 const Sidebar = styled.div`
@@ -344,7 +343,7 @@ const AddModal = styled.div`
   border-radius: 15px;
   position: absolute;
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-  z-index: 1000;
+  z-index: 999;
   right: 30px;
   top: 120px;
 `;
