@@ -374,20 +374,11 @@ const Gallery = styled.div`
 `;
 
 const Photo = styled.img`
-  width: 400px;
-  height: 400px;
+  width: 300px;
+  height: 300px;
   object-fit: cover;
   border: 5px solid #fff;
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-  /* transform: rotate(${() => Math.random() * 10 - 5}deg); */
-
-  /* &:nth-child(even) {
-    transform: rotate(${() => Math.random() * 10 - 5}deg) translateY(-10px);
-  }
-
-  &:nth-child(odd) {
-    transform: rotate(${() => Math.random() * 10 - 5}deg) translateY(10px);
-  } */
 
   &:hover {
     transform: scale(1.05);
