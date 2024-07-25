@@ -341,10 +341,10 @@ const DeskImage = styled.img`
 `;
 
 const BackImage = styled.img`
-  width: 340px;
-  height: 230px;
-  left: 268px;
-  top: 140px;
+  width: 250px;
+  height: 165px;
+  left: 210px;
+  top: 105px;
   border-radius: 10px;
   border: none;
   position: absolute;

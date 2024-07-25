@@ -1,5 +1,6 @@
 "use client";
 
+import Loading from "@/components/Loading";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
@@ -86,35 +87,41 @@ const Keyboard = () => {
           </Sidebar>
         </SidebarOverlay>
       )}
-      <Header>
-        <HeaderRight>
-          <Logo>Keyboard</Logo>
-          <SubText>Recommended keyboard for you</SubText>
-        </HeaderRight>
-        <MenuButton onClick={toggleSidebar}>Menu</MenuButton>
-      </Header>
-      <ItemTopWrapper>
-        {geminiKeyboards.map((keyboard, index) => (
-          <KeyboardCard
-            key={index}
-            onClick={() => handleCardClick(keyboard.name)}
-          >
-            <KeyboardTitle>{keyboard.name}</KeyboardTitle>
-            <List>
-              <ListTitle>Pros:</ListTitle>
-              {keyboard.pros.map((pro, idx) => (
-                <ListItem key={idx}>{pro}</ListItem>
-              ))}
-            </List>
-            <List>
-              <ListTitle>Cons:</ListTitle>
-              {keyboard.cons.map((con, idx) => (
-                <ListItem key={idx}>{con}</ListItem>
-              ))}
-            </List>
-          </KeyboardCard>
-        ))}
-      </ItemTopWrapper>
+      {geminiKeyboards.length ? (
+        <>
+          <Header>
+            <HeaderRight>
+              <Logo>Keyboard</Logo>
+              <SubText>Recommended keyboard for you</SubText>
+            </HeaderRight>
+            <MenuButton onClick={toggleSidebar}>Menu</MenuButton>
+          </Header>
+          <ItemTopWrapper>
+            {geminiKeyboards.map((keyboard, index) => (
+              <KeyboardCard
+                key={index}
+                onClick={() => handleCardClick(keyboard.name)}
+              >
+                <KeyboardTitle>{keyboard.name}</KeyboardTitle>
+                <List>
+                  <ListTitle>Pros:</ListTitle>
+                  {keyboard.pros.map((pro, idx) => (
+                    <ListItem key={idx}>{pro}</ListItem>
+                  ))}
+                </List>
+                <List>
+                  <ListTitle>Cons:</ListTitle>
+                  {keyboard.cons.map((con, idx) => (
+                    <ListItem key={idx}>{con}</ListItem>
+                  ))}
+                </List>
+              </KeyboardCard>
+            ))}
+          </ItemTopWrapper>
+        </>
+      ) : (
+        <Loading />
+      )}
     </KeyboardWrapper>
   );
 };

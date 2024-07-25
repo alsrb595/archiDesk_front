@@ -1,5 +1,6 @@
 "use client";
 
+import Loading from "@/components/Loading";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
@@ -86,35 +87,41 @@ const Monitor = () => {
           </Sidebar>
         </SidebarOverlay>
       )}
-      <Header>
-        <HeaderRight>
-          <Logo>Monitor</Logo>
-          <SubText>Recommended monitor for you</SubText>
-        </HeaderRight>
-        <MenuButton onClick={toggleSidebar}>Menu</MenuButton>
-      </Header>
-      <ItemTopWrapper>
-        {geminiMonitors.map((monitor, index) => (
-          <MonitorCard
-            key={index}
-            onClick={() => handleCardClick(monitor.name)}
-          >
-            <MonitorTitle>{monitor.name}</MonitorTitle>
-            <List>
-              <ListTitle>Pros:</ListTitle>
-              {monitor.pros.map((pro, idx) => (
-                <ListItem key={idx}>{pro}</ListItem>
-              ))}
-            </List>
-            <List>
-              <ListTitle>Cons:</ListTitle>
-              {monitor.cons.map((con, idx) => (
-                <ListItem key={idx}>{con}</ListItem>
-              ))}
-            </List>
-          </MonitorCard>
-        ))}
-      </ItemTopWrapper>
+      {geminiMonitors.length ? (
+        <>
+          <Header>
+            <HeaderRight>
+              <Logo>Monitor</Logo>
+              <SubText>Recommended monitor for you</SubText>
+            </HeaderRight>
+            <MenuButton onClick={toggleSidebar}>Menu</MenuButton>
+          </Header>
+          <ItemTopWrapper>
+            {geminiMonitors.map((monitor, index) => (
+              <MonitorCard
+                key={index}
+                onClick={() => handleCardClick(monitor.name)}
+              >
+                <MonitorTitle>{monitor.name}</MonitorTitle>
+                <List>
+                  <ListTitle>Pros:</ListTitle>
+                  {monitor.pros.map((pro, idx) => (
+                    <ListItem key={idx}>{pro}</ListItem>
+                  ))}
+                </List>
+                <List>
+                  <ListTitle>Cons:</ListTitle>
+                  {monitor.cons.map((con, idx) => (
+                    <ListItem key={idx}>{con}</ListItem>
+                  ))}
+                </List>
+              </MonitorCard>
+            ))}
+          </ItemTopWrapper>
+        </>
+      ) : (
+        <Loading />
+      )}
     </MonitorWrapper>
   );
 };

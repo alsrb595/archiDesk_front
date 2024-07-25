@@ -1,5 +1,6 @@
 "use client";
 
+import Loading from "@/components/Loading";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
@@ -84,32 +85,41 @@ const Mouse = () => {
           </Sidebar>
         </SidebarOverlay>
       )}
-      <Header>
-        <HeaderRight>
-          <Logo>Mouse</Logo>
-          <SubText>Recommended mouse for you</SubText>
-        </HeaderRight>
-        <MenuButton onClick={toggleSidebar}>Menu</MenuButton>
-      </Header>
-      <ItemTopWrapper>
-        {geminiMouses.map((mouse, index) => (
-          <MouseCard key={index} onClick={() => handleCardClick(mouse.name)}>
-            <MouseTitle>{mouse.name}</MouseTitle>
-            <List>
-              <ListTitle>Pros:</ListTitle>
-              {mouse.pros.map((pro, idx) => (
-                <ListItem key={idx}>{pro}</ListItem>
-              ))}
-            </List>
-            <List>
-              <ListTitle>Cons:</ListTitle>
-              {mouse.cons.map((con, idx) => (
-                <ListItem key={idx}>{con}</ListItem>
-              ))}
-            </List>
-          </MouseCard>
-        ))}
-      </ItemTopWrapper>
+      {geminiMouses.length ? (
+        <>
+          <Header>
+            <HeaderRight>
+              <Logo>Mouse</Logo>
+              <SubText>Recommended mouse for you</SubText>
+            </HeaderRight>
+            <MenuButton onClick={toggleSidebar}>Menu</MenuButton>
+          </Header>
+          <ItemTopWrapper>
+            {geminiMouses.map((mouse, index) => (
+              <MouseCard
+                key={index}
+                onClick={() => handleCardClick(mouse.name)}
+              >
+                <MouseTitle>{mouse.name}</MouseTitle>
+                <List>
+                  <ListTitle>Pros:</ListTitle>
+                  {mouse.pros.map((pro, idx) => (
+                    <ListItem key={idx}>{pro}</ListItem>
+                  ))}
+                </List>
+                <List>
+                  <ListTitle>Cons:</ListTitle>
+                  {mouse.cons.map((con, idx) => (
+                    <ListItem key={idx}>{con}</ListItem>
+                  ))}
+                </List>
+              </MouseCard>
+            ))}
+          </ItemTopWrapper>
+        </>
+      ) : (
+        <Loading />
+      )}
     </MouseWrapper>
   );
 };

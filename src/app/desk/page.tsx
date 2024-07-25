@@ -1,5 +1,6 @@
 "use client";
 
+import Loading from "@/components/Loading";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
@@ -84,32 +85,38 @@ const Desk = () => {
           </Sidebar>
         </SidebarOverlay>
       )}
-      <Header>
-        <HeaderRight>
-          <Logo>Desk</Logo>
-          <SubText>Recommended desk for you</SubText>
-        </HeaderRight>
-        <MenuButton onClick={toggleSidebar}>Menu</MenuButton>
-      </Header>
-      <ItemTopWrapper>
-        {geminiDesks.map((desk, index) => (
-          <DeskCard key={index} onClick={() => handleCardClick(desk.name)}>
-            <DeskTitle>{desk.name}</DeskTitle>
-            <List>
-              <ListTitle>Pros:</ListTitle>
-              {desk.pros.map((pro, idx) => (
-                <ListItem key={idx}>{pro}</ListItem>
-              ))}
-            </List>
-            <List>
-              <ListTitle>Cons:</ListTitle>
-              {desk.cons.map((con, idx) => (
-                <ListItem key={idx}>{con}</ListItem>
-              ))}
-            </List>
-          </DeskCard>
-        ))}
-      </ItemTopWrapper>
+      {geminiDesks.length ? (
+        <>
+          <Header>
+            <HeaderRight>
+              <Logo>Desk</Logo>
+              <SubText>Recommended desk for you</SubText>
+            </HeaderRight>
+            <MenuButton onClick={toggleSidebar}>Menu</MenuButton>
+          </Header>
+          <ItemTopWrapper>
+            {geminiDesks.map((desk, index) => (
+              <DeskCard key={index} onClick={() => handleCardClick(desk.name)}>
+                <DeskTitle>{desk.name}</DeskTitle>
+                <List>
+                  <ListTitle>Pros:</ListTitle>
+                  {desk.pros.map((pro, idx) => (
+                    <ListItem key={idx}>{pro}</ListItem>
+                  ))}
+                </List>
+                <List>
+                  <ListTitle>Cons:</ListTitle>
+                  {desk.cons.map((con, idx) => (
+                    <ListItem key={idx}>{con}</ListItem>
+                  ))}
+                </List>
+              </DeskCard>
+            ))}
+          </ItemTopWrapper>
+        </>
+      ) : (
+        <Loading />
+      )}
     </DeskWrapper>
   );
 };
