@@ -417,6 +417,7 @@ const RightTop = styled.div`
 
 const RightTopHeader = styled.div`
   width: 100%;
+  height: 20%;
   padding: 20px 30px;
   box-sizing: border-box;
   background-color: #4c4c4b;
@@ -424,6 +425,9 @@ const RightTopHeader = styled.div`
   font-size: 20px;
   border-top-left-radius: 15px;
   border-top-right-radius: 15px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 `;
 
 const RightTopBody = styled.div`
@@ -450,6 +454,9 @@ const RightBottomHeader = styled.div`
   background-color: #4c4c4b;
   color: #f7f8f9;
   font-size: 20px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 `;
 
 const RightBottomBody = styled.div`
