@@ -14,10 +14,6 @@
 - Back-End: Nest JS
 - Database: Mysql
 
-## ERD
-
-<img width="697" alt="스크린샷 2024-07-25 오후 7 17 52" src="https://github.com/user-attachments/assets/261bac29-fad1-436a-a433-05ea830a595a">
-
 ## 웹 이미지
 
 <img width="1509" alt="KakaoTalk_Photo_2024-07-25-19-20-36" src="https://github.com/user-attachments/assets/70d4bb33-8b87-40c1-af0a-dfa877c16f68">
